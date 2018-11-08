@@ -31,6 +31,24 @@ hexo init &amp;lt;folder&amp;gt; cd &amp;lt;folder&amp;gt; npm install  如此�
     
     <item>
       <title>大道至簡Hexo</title>
+      <link>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93exo%E7%9A%84%E5%89%AF%E6%9C%AC/</link>
+      <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93exo%E7%9A%84%E5%89%AF%E6%9C%AC/</guid>
+      <description>大道至簡Hexo Hexo 是一個由Node.js構建的快速、簡單且強大的網誌框架。
+安裝 安裝環境 Mac用戶在編譯時可能會碰到問題，請先至 App Store 安裝 Xcode，一旦 Xcode 安裝完成後，開啟它並前往 Preferences -&amp;gt; Download -&amp;gt; Command Line Tools -&amp;gt; Install 安裝命令列工具。
+安裝Node.js 既然是由Node.js構建的網志框架，那必可不少的環境之一肯定是Node.js。這裏通過安裝包一鍵安裝，亦可通過本地編譯完成安裝。 安裝 Node.js 的最佳方式是透過 Node Version Manager。感謝 nvm 的開發者提供簡易自動安裝的腳本指令： cURL:
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash  Wget:
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash  一旦安裝完成，重啟終端機並執行下列指令以安裝 Node.js。
+nvm install stable  安裝Git 安裝Git的最佳方式是透過Homebrew安裝。
+brew install git  安裝Hexo 在終端下執行下列指令以安裝Hexo。
+npm install -g hexo-cli  截至目前，便完成了Hexo的基本安裝。
+配置 配置內容，比較複雜，供參考學習的資料網路上也是非常的多，但還是推薦也通讀一遍Hexo官方文檔
+hexo init &amp;lt;folder&amp;gt; cd &amp;lt;folder&amp;gt; npm install  如此網誌便已完成建立，在中會出現以下目錄 - _config.</description>
+    </item>
+    
+    <item>
+      <title>大道至簡Hexo</title>
       <link>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/</link>
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
       
