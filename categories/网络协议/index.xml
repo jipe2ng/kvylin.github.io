@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络协议 on 余的记忆</title>
+    <link>https://kvylin.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in 网络协议 on 余的记忆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 27 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kvylin.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2038年问题</title>
+      <link>https://kvylin.github.io/2018/2038/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/2038/</guid>
+      <description> 什么是“2038年问题”?  2038年问题可能会导致某些软件在2038年1月19日3时14分07秒之后无法正常工作。所有使用POSIX时间表示时间的程序都将受其影响，因为它们以自1970年1月1日经过的秒数（忽略闰秒）来表示时间。 在大部分的32位操作系统上，此“time” 数据模式使用一个有正负号的32位整数（signed int32）存储计算的秒数。依照此“time_t”标准，在此格式能被表示的最后时间是2038年1月19日03:14:07 。
+有什么影响？ 超过此一瞬间，时间将会“绕回&amp;rdquo;溢出&amp;rdquo;)”（wrap around）且在内部被表示为一个负数，并造成程序无法工作，因为它们无法将此时间识别为2038年，而可能会依个别实现而跳回1970年或1901年。因此可能产生错误的计算及动作。
+ 有少数的情况下，在制定规格时，特别规定以无正负号的32位整数（unsigned int32）存储 POSIX 时间，因此错误会被延后到 2106 年。例如比特币区块链中的区块时间戳记，就是以这种方法存储。
+嵌入式系统 有数以亿计的32位系统在运行中，特别是许多嵌入式系统。相对于一般计算机科技18至24个月的革命性更新，嵌入式系统可能直至使用寿命终结都不会改变。32位time_t的使用亦被编码于文件格式，例如众所周知的ZIP压缩格式。其能存在的时间远比受影响的机器长。 新的64位运算器可以记录至约2900亿年后的292,277,026,596年12月4日15:30:08，星期日（UTC）
+网络时间协议（Network Time Protocol，简称NTP）  </description>
+    </item>
+    
+  </channel>
+</rss>
