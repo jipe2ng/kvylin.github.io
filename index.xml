@@ -69,6 +69,65 @@ sysctl net.ipv4.tcp_congestion_control
     </item>
     
     <item>
+      <title>TCP BBR擁塞控制算法</title>
+      <link>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD%E7%9A%84%E5%89%AF%E6%9C%AC/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD%E7%9A%84%E5%89%AF%E6%9C%AC/</guid>
+      <description>
+
+&lt;h1 id=&#34;tcp-bbr擁塞控制算法&#34;&gt;TCP BBR擁塞控制算法&lt;/h1&gt;
+
+&lt;p&gt;BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。&lt;a href=&#34;https://github.com/google/bbr&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;項目更新在這裏&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+
+&lt;h3 id=&#34;tcp基於丟包的擁塞控制&#34;&gt;TCP基於丟包的擁塞控制&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;慢啓動階段：在建立新的TCP連接時，擁塞窗口（congestion window , 即cwnd）會初始化爲一個數據包大小，源斷按cwnd大小發送數據，每收到一個ACK確認，cwnd就增加一個數據包發送量，如此cwnd會隨着回路響應時間（RTT）的增加而增長。&lt;/li&gt;
+&lt;li&gt;擁塞避免階段：若源斷發現超時或收到3個相同的ACK時，便認爲網絡發生了擁塞，進入擁塞避免階段。慢啓動閾值（ssthresh）被設置爲cwnd的一半；如果超時，擁塞窗口被置1。當cwnd&amp;gt;ssthresh，TCP就會執行擁塞避免算法。&lt;/li&gt;
+&lt;li&gt;快速重傳階段：在這個階段中，接受方在收到失序的報文段後會馬上發出重複確認，而不要等到自己發送數據時捎帶確認。&lt;/li&gt;
+&lt;li&gt;快速恢復階段：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;bbr-v2更新啦-2018&#34;&gt;BBR v2更新啦（2018）&lt;/h2&gt;
+
+&lt;h2 id=&#34;centos7下開啓bbr擁塞控制算法&#34;&gt;CentOS7下開啓BBR擁塞控制算法&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;查看Linux內核版本&lt;code&gt;unmae -a&lt;/code&gt;
+開啓BBR的要求之一是內核版本必須在4.9以上&lt;/li&gt;
+&lt;li&gt;升級內核版本
+
+&lt;ul&gt;
+&lt;li&gt;添加ELRepo GPG key&lt;code&gt;rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;添加源&lt;code&gt;rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安裝fastestmirror&lt;code&gt;yum install yum-plugin-fastestmirror&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安裝最新Kernel&lt;code&gt;yum --enablerepo=elrepo-kernel install kernel-ml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切換到新內核並重啓&lt;code&gt;grub2-set-default 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;開啓BBR
+
+&lt;ul&gt;
+&lt;li&gt;在終端中輸入
+&lt;code&gt;vi /etc/sysctl.conf&lt;/code&gt;，並加入
+&lt;code&gt;
+net.core.default_qdisc=tcp_bbr
+net.ipv4.tcp_congestion_control=bbr
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;檢查是否設置成功
+&lt;code&gt;
+sysctl net.ipv4.tcp_available_congestion_control
+sysctl net.ipv4.tcp_congestion_control
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;檢查BBR是否正常運行&lt;code&gt;lsmod | grep tcp_bbr&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>大道至簡Hexo</title>
       <link>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/</link>
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
