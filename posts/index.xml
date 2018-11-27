@@ -39,14 +39,5 @@ npm install -g hexo-cli  截至目前，便完成了Hexo的基本安裝。
 hexo init &amp;lt;folder&amp;gt; cd &amp;lt;folder&amp;gt; npm install  如此網誌便已完成建立，在中會出現以下目錄 - _config.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://kvylin.github.io/1/%E4%BA%A7%E5%93%81/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/1/%E4%BA%A7%E5%93%81/</guid>
-      <description> 大家的家 </description>
-    </item>
-    
   </channel>
 </rss>
