@@ -1,56 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 余的记忆</title>
-    <link>https://kvylin.github.io/posts/</link>
-    <description>Recent content in Posts on 余的记忆</description>
+    <title>科幻 on 余的记忆</title>
+    <link>https://kvylin.github.io/tags/%E7%A7%91%E5%B9%BB/</link>
+    <description>Recent content in 科幻 on 余的记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 27 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Dec 2002 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://kvylin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kvylin.github.io/tags/%E7%A7%91%E5%B9%BB/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>2038年问题</title>
-      <link>https://kvylin.github.io/2018/2038/</link>
-      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/2038/</guid>
-      <description> 什么是“2038年问题”?  2038年问题可能会导致某些软件在2038年1月19日3时14分07秒之后无法正常工作。所有使用POSIX时间表示时间的程序都将受其影响，因为它们以自1970年1月1日经过的秒数（忽略闰秒）来表示时间。 在大部分的32位操作系统上，此“time” 数据模式使用一个有正负号的32位整数（signed int32）存储计算的秒数。依照此“time_t”标准，在此格式能被表示的最后时间是2038年1月19日03:14:07 。
-有什么影响？ 超过此一瞬间，时间将会“绕回&amp;rdquo;溢出&amp;rdquo;)”（wrap around）且在内部被表示为一个负数，并造成程序无法工作，因为它们无法将此时间识别为2038年，而可能会依个别实现而跳回1970年或1901年。因此可能产生错误的计算及动作。
- 有少数的情况下，在制定规格时，特别规定以无正负号的32位整数（unsigned int32）存储 POSIX 时间，因此错误会被延后到 2106 年。例如比特币区块链中的区块时间戳记，就是以这种方法存储。
-嵌入式系统 有数以亿计的32位系统在运行中，特别是许多嵌入式系统。相对于一般计算机科技18至24个月的革命性更新，嵌入式系统可能直至使用寿命终结都不会改变。32位time_t的使用亦被编码于文件格式，例如众所周知的ZIP压缩格式。其能存在的时间远比受影响的机器长。 新的64位运算器可以记录至约2900亿年后的292,277,026,596年12月4日15:30:08，星期日（UTC）
-网络时间协议（Network Time Protocol，简称NTP）  </description>
-    </item>
-    
-    <item>
-      <title>TCP BBR擁塞控制算法</title>
-      <link>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/</link>
-      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/</guid>
-      <description> TCP BBR擁塞控制算法 BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。項目更新在這裏
-前提 TCP基於丟包的擁塞控制  慢啓動階段：在建立新的TCP連接時，擁塞窗口（congestion window , 即cwnd）會初始化爲一個數據包大小，源斷按cwnd大小發送數據，每收到一個ACK確認，cwnd就增加一個數據包發送量，如此cwnd會隨着回路響應時間（RTT）的增加而增長。 擁塞避免階段：若源斷發現超時或收到3個相同的ACK時，便認爲網絡發生了擁塞，進入擁塞避免階段。慢啓動閾值（ssthresh）被設置爲cwnd的一半；如果超時，擁塞窗口被置1。當cwnd&amp;gt;ssthresh，TCP就會執行擁塞避免算法。 快速重傳階段：在這個階段中，接受方在收到失序的報文段後會馬上發出重複確認，而不要等到自己發送數據時捎帶確認。 快速恢復階段：  BBR v2更新啦（2018） CentOS7下開啓BBR擁塞控制算法  查看Linux內核版本unmae -a 開啓BBR的要求之一是內核版本必須在4.9以上 升級內核版本  添加ELRepo GPG keyrpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 添加源rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm 安裝fastestmirroryum install yum-plugin-fastestmirror 安裝最新Kernelyum --enablerepo=elrepo-kernel install kernel-ml 切換到新內核並重啓grub2-set-default 0  開啓BBR  在終端中輸入 vi /etc/sysctl.conf，並加入  net.core.default_qdisc=tcp_bbr net.ipv4.tcp_congestion_control=bbr  檢查是否設置成功  sysctl net.ipv4.tcp_available_congestion_control sysctl net.ipv4.tcp_congestion_control   檢查BBR是否正常運行lsmod | grep tcp_bbr  </description>
-    </item>
-    
-    <item>
-      <title>大道至簡Hexo</title>
-      <link>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/</link>
-      <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/</guid>
-      <description>大道至簡Hexo Hexo 是一個由Node.js構建的快速、簡單且強大的網誌框架。
-安裝 安裝環境 Mac用戶在編譯時可能會碰到問題，請先至 App Store 安裝 Xcode，一旦 Xcode 安裝完成後，開啟它並前往 Preferences -&amp;gt; Download -&amp;gt; Command Line Tools -&amp;gt; Install 安裝命令列工具。
-安裝Node.js 既然是由Node.js構建的網志框架，那必可不少的環境之一肯定是Node.js。這裏通過安裝包一鍵安裝，亦可通過本地編譯完成安裝。 安裝 Node.js 的最佳方式是透過 Node Version Manager。感謝 nvm 的開發者提供簡易自動安裝的腳本指令： cURL:
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash  Wget:
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash  一旦安裝完成，重啟終端機並執行下列指令以安裝 Node.js。
-nvm install stable  安裝Git 安裝Git的最佳方式是透過Homebrew安裝。
-brew install git  安裝Hexo 在終端下執行下列指令以安裝Hexo。
-npm install -g hexo-cli  截至目前，便完成了Hexo的基本安裝。
-配置 配置內容，比較複雜，供參考學習的資料網路上也是非常的多，但還是推薦也通讀一遍Hexo官方文檔
-hexo init &amp;lt;folder&amp;gt; cd &amp;lt;folder&amp;gt; npm install  如此網誌便已完成建立，在中會出現以下目錄 - _config.</description>
-    </item>
     
     <item>
       <title>“W” 计划</title>
