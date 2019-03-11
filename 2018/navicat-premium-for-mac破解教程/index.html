@@ -53,11 +53,11 @@
 算出有效的Mac版序列號密匙 序列號是一個16字節長度的字符串，是經過Base32編碼的，其實際存儲長度爲80位（8字節），輸入密匙後程序仍然會用Base33編碼，以二進制形式存儲比對。 正常的Base32編碼表順序是 char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’ 80位長的二進制數據，可轉換成爲10個十六進制，如 第壹個8位二進制數據：68 /原作者表示不知是什麼，但不能改變； 第貳個8位二進制數據：2A /原作者表示不知是什麼，但不能改變； 第叄個8位二進制數據：00 /原作者表示不知是什麼，但可任意改變； 第肆個8位二進制數據：00 /原作者表示不知是什麼，但可任意改變； 第伍個8位二進制數據：00 /原作者表示不知是什麼，但可任意改變； 第陸個8位二進制數據：AA /第陸個和第柒個組合使用； 第柒個8位二進制數據：99 /第陸個和第柒個組合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表簡體中文版，0xAA 0x99代表繁體中文版，0xAD 0x82代表日本語，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第捌個8位二進制數據：65 /代表商業許可類型，0x65代表企業版，0x66代表教育版，0x67代表精簡版；（以上數據爲Navicat12版本） 第玖個8位二進制數據：C0 /這個8位數據的前4位必須是1100，轉換爲十進制就是12，代表版本12，數據的後4位不知道代表什麼，但是可以延遲激活使用時間，後4位可以是0000或0001；（以上數據爲Navicat12版本） 第拾個8位二進制數據：FF /代表許可的期限權利類型，0xFB代表30天不可轉售許可，0xFC代表90天不可轉售許可，0xFD代表365天不可轉售許可，0xFE代表不可轉售許可，0xFF代表站點許可； 如此，得到繁體中文版密匙的原始數據：68 2A 00 00 00 AA 99 65 C0 FF
  對密匙後8個8位數據進行DES對稱加密，使用DES加密算法，並採用ECB模式。這裏，需要加密的是爲00 00 00 AA 99 65 C0 FF，DES加密密匙是unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }，計算得出加密後的序列號密匙數據，並將原始數據轉化爲二進制，按每5位一組，進行Base32編碼，轉爲十進制，按找Base32編碼表，便能得到了相應版本的密匙。",
     "inLanguage" : "zh-cn",
-    "author" : "yk1n0rt",
-    "creator" : "yk1n0rt",
-    "publisher": "yk1n0rt",
-    "accountablePerson" : "yk1n0rt",
-    "copyrightHolder" : "yk1n0rt",
+    "author" : "Yu-L.in",
+    "creator" : "Yu-L.in",
+    "publisher": "Yu-L.in",
+    "accountablePerson" : "Yu-L.in",
+    "copyrightHolder" : "Yu-L.in",
     "copyrightYear" : "2018",
     "datePublished": "2018-09-01 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-09-01 00:00:00 &#43;0000 UTC",
@@ -127,7 +127,7 @@
     <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Navicat Premium for Mac 破解教程</h1>
         <div class="post-meta">
-                Written by <a itemprop="name" href="https://kvylin.github.io" rel="author">yk1n0rt</a> with ♥ 
+                Written by <a itemprop="name" href="https://kvylin.github.io" rel="author">Yu-L.in</a> with ♥ 
                 <span class="post-time">
                 on <time datetime=2018-09-01 itemprop="datePublished">September 1, 2018</time>
                 </span>
