@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>BBR</title>
-      <link>https://kvylin.github.io/tags/bbr/</link>
-      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/tags/bbr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Github</title>
       <link>https://kvylin.github.io/tags/github/</link>
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
@@ -53,6 +44,15 @@
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://kvylin.github.io/tags/hexo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Homebrew</title>
+      <link>https://kvylin.github.io/tags/homebrew/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/tags/homebrew/</guid>
       <description></description>
     </item>
     
@@ -75,20 +75,29 @@
     </item>
     
     <item>
+      <title>libfaketime</title>
+      <link>https://kvylin.github.io/tags/libfaketime/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/tags/libfaketime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>surge</title>
+      <link>https://kvylin.github.io/tags/surge/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/tags/surge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>unix</title>
       <link>https://kvylin.github.io/tags/unix/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://kvylin.github.io/tags/unix/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>加密與解密</title>
-      <link>https://kvylin.github.io/tags/%E5%8A%A0%E5%AF%86%E8%88%87%E8%A7%A3%E5%AF%86/</link>
-      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/tags/%E5%8A%A0%E5%AF%86%E8%88%87%E8%A7%A3%E5%AF%86/</guid>
       <description></description>
     </item>
     
@@ -107,15 +116,6 @@
       <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://kvylin.github.io/tags/%E5%A4%A7%E9%81%93/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>控制論</title>
-      <link>https://kvylin.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AB%96/</link>
-      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AB%96/</guid>
       <description></description>
     </item>
     
@@ -143,6 +143,15 @@
       <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://kvylin.github.io/tags/%E7%BD%91%E7%BB%9C%E6%97%B6%E9%97%B4%E5%8D%8F%E8%AE%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>试用</title>
+      <link>https://kvylin.github.io/tags/%E8%AF%95%E7%94%A8/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/tags/%E8%AF%95%E7%94%A8/</guid>
       <description></description>
     </item>
     
