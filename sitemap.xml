@@ -3,9 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://kvylin.github.io/2018/2038/</loc>
+      <loc>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/</loc>
       
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD%E7%9A%84%E5%89%AF%E6%9C%AC/</loc>
+      
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
@@ -23,26 +33,6 @@
     </url>
   
     <url>
-      <loc>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
-      
-      <lastmod>2018-09-02T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/2018/navicat-premium-for-mac%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</loc>
-      
-      <lastmod>2018-09-01T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://kvylin.github.io/about/</loc>
       
       <lastmod>2014-04-09T00:00:00+00:00</lastmod>
@@ -53,31 +43,9 @@
     </url>
   
     <url>
-      <loc>https://kvylin.github.io/2002/w-%E8%AE%A1%E5%88%92-2002.12.7/</loc>
+      <loc>https://kvylin.github.io/tags/bbr/</loc>
       
-      <lastmod>2002-12-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/13%E5%B2%81%E7%9A%84%E5%B0%8F%E4%BD%9C/</loc>
-      
-      <lastmod>2002-12-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/2038/</loc>
-      
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
@@ -121,30 +89,6 @@
     </url>
   
     <url>
-      <loc>https://kvylin.github.io/tags/homebrew/</loc>
-      
-      <lastmod>2018-09-02T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/navicat/</loc>
-      
-      <lastmod>2018-09-01T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://kvylin.github.io/tags/nodejs/</loc>
       
       <lastmod>2018-09-03T00:00:00+00:00</lastmod>
@@ -159,7 +103,7 @@
     <url>
       <loc>https://kvylin.github.io/posts/</loc>
       
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
@@ -171,19 +115,7 @@
     <url>
       <loc>https://kvylin.github.io/tags/</loc>
       
-      <lastmod>2002-12-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/libfaketime/</loc>
-      
-      <lastmod>2018-09-02T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
@@ -201,45 +133,9 @@
     </url>
   
     <url>
-      <loc>https://kvylin.github.io/tags/surge/</loc>
-      
-      <lastmod>2018-09-02T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/unix/</loc>
-      
-      <lastmod>2018-09-01T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://kvylin.github.io/</loc>
       
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/%E5%8D%83%E5%B9%B4%E8%99%AB/</loc>
-      
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
@@ -261,57 +157,9 @@
     </url>
   
     <url>
-      <loc>https://kvylin.github.io/tags/%E7%8E%AF%E5%A2%83%E4%BF%9D%E6%8A%A4/</loc>
+      <loc>https://kvylin.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AB%96/</loc>
       
-      <lastmod>2002-12-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/%E7%A7%91%E5%B9%BB/</loc>
-      
-      <lastmod>2002-12-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-      
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/%E7%BD%91%E7%BB%9C%E6%97%B6%E9%97%B4%E5%8D%8F%E8%AE%AE/</loc>
-      
-      <lastmod>2018-11-27T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://kvylin.github.io/tags/%E8%AF%95%E7%94%A8/</loc>
-      
-      <lastmod>2018-09-02T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-24T00:00:00+00:00</lastmod>
       
       
       
