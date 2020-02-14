@@ -9,8 +9,8 @@
   
   
   
-  <link rel="prev" href="https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/" />
-  <link rel="next" href="https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/" />
+  <link rel="prev" href="https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/" />
+  
   <link rel="canonical" href="https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Navicat Premium for Mac 破解教程 | 余的记忆
+           TCP BBR擁塞控制算法 | 余的记忆
        
   </title>
-  <meta name="title" content="Navicat Premium for Mac 破解教程 | 余的记忆">
+  <meta name="title" content="TCP BBR擁塞控制算法 | 余的记忆">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,14 +44,10 @@
          "@id": "https://kvylin.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Navicat Premium for Mac 破解教程",
-    "headline" : "Navicat Premium for Mac 破解教程",
-    "description" : "本文仅以探讨破解思路，请支持正版
-破解思路 替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）
-生成自己的RSA公匙私匙对 使用open ssl工具生成，当然也可以使用其它工具在线生成工具生成，這里需要注意的是密匙是2048位，PKCS#8格式
-替换RSA公匙  版本12.0.24之前，公匙存储在Navicat Premium.app/Contents/Resources/rpk，用文本编辑器打开它，替换上述生成的公匙 12.0.24之后，公匙不再存储在Navicat Premium.app/Contents/Resources/rpk中，而是放在了Navicat的二进制执行文件Navicat Premium.app/Contents/MacOS/Navicat Premium中，通过搜索-----BEGIN PUBLIC KEY-----找到它
-算出有效的Mac版序列号密匙 序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’ 80位长的二进制数据，可转换成为10个十六进制，如
- 第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变； 第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变； 第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第六个8位二进制数据：AA /第六个和第七个组合使用； 第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本） 第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本） 第十个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可； 如此，得到繁体中文版密匙的原始数据：68 2A 00 00 00 AA 99 65 C0 FF  对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为00 00 00 AA 99 65 C0 FF，DES加密密匙是unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。",
+    "name" : "TCP BBR擁塞控制算法",
+    "headline" : "TCP BBR擁塞控制算法",
+    "description" : " BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。項目更新在這裏
+前提 TCP基於丟包的擁塞控制  慢啓動階段：在建立新的TCP連接時，擁塞窗口（congestion window , 即cwnd）會初始化爲一個數據包大小，源斷按cwnd大小發送數據，每收到一個ACK確認，cwnd就增加一個數據包發送量，如此cwnd會隨着回路響應時間（RTT）的增加而增長。 擁塞避免階段：若源斷發現超時或收到3個相同的ACK時，便認爲網絡發生了擁塞，進入擁塞避免階段。慢啓動閾值（ssthresh）被設置爲cwnd的一半；如果超時，擁塞窗口被置1。當cwnd&gt;ssthresh，TCP就會執行擁塞避免算法。 快速重傳階段：在這個階段中，接受方在收到失序的報文段後會馬上發出重複確認，而不要等到自己發送數據時捎帶確認。 快速恢復階段：  BBR v2更新啦（2018） CentOS7下開啓BBR擁塞控制算法  查看Linux內核版本unmae -a 開啓BBR的要求之一是內核版本必須在4.9以上 升級內核版本  添加ELRepo GPG keyrpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 添加源rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm 安裝fastestmirroryum install yum-plugin-fastestmirror 安裝最新Kernelyum --enablerepo=elrepo-kernel install kernel-ml 切換到新內核並重啓grub2-set-default 0  開啓BBR  在終端中輸入 vi /etc/sysctl.conf，並加入  net.core.default_qdisc=tcp_bbr net.ipv4.tcp_congestion_control=bbr  檢查是否設置成功  sysctl net.ipv4.tcp_available_congestion_control sysctl net.ipv4.tcp_congestion_control   檢查BBR是否正常運行lsmod | grep tcp_bbr  ",
     "inLanguage" : "zh-cn",
     "author" : "yu-l.in",
     "creator" : "yu-l.in",
@@ -59,11 +55,11 @@
     "accountablePerson" : "yu-l.in",
     "copyrightHolder" : "yu-l.in",
     "copyrightYear" : "2018",
-    "datePublished": "2018-09-01 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-09-01 00:00:00 &#43;0000 UTC",
+    "datePublished": "2018-09-24 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2018-09-24 00:00:00 &#43;0000 UTC",
     "url" : "https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/",
-    "wordCount" : "122",
-    "keywords" : [ "Navicat","Mac","RSA公匙", "余的记忆"]
+    "wordCount" : "49",
+    "keywords" : [ "BBR","控制論", "余的记忆"]
 }
 </script>
 
@@ -125,11 +121,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Navicat Premium for Mac 破解教程</h1>
+        <h1 class="post-title" itemprop="name headline">TCP BBR擁塞控制算法</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://kvylin.github.io" rel="author">yu-l.in</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2018-09-01 itemprop="datePublished">September 1, 2018</time>
+                on <time datetime=2018-09-24 itemprop="datePublished">September 24, 2018</time>
                 </span>
                 in
                 
@@ -138,8 +134,6 @@
     <div class="post-content">
         
 
-        
-            
         
 
         
@@ -155,58 +149,52 @@
 
           
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://i.loli.net/2020/02/14/jEBbMIF463PGfu8.jpg" alt="andrew-neel-1332001.jpg" class="lazyload"><figcaption class="image-caption">andrew-neel-1332001.jpg</figcaption></figure>
-本文仅以探讨破解思路，请支持正版</p>
+<p>BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。<a href="https://github.com/google/bbr" rel="nofollow noreferrer" target="_blank">項目更新在這裏</a></p>
 
-<h1 id="破解思路">破解思路</h1>
+<h2 id="前提">前提</h2>
 
-<p>替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）</p>
-
-<h1 id="生成自己的rsa公匙私匙对">生成自己的RSA公匙私匙对</h1>
-
-<p>使用open ssl工具生成，当然也可以使用其它工具<a href="http://web.chacuo.net/netrsakeypair" rel="nofollow noreferrer" target="_blank">在线生成工具</a>生成，這里需要注意的是<code>密匙是2048位，PKCS#8格式</code></p>
-
-<h1 id="替换rsa公匙">替换RSA公匙</h1>
+<h3 id="tcp基於丟包的擁塞控制">TCP基於丟包的擁塞控制</h3>
 
 <ul>
-<li>版本12.0.24之前，公匙存储在<strong>Navicat Premium.app/Contents/Resources/rpk</strong>，用文本编辑器打开它，替换上述生成的公匙</li>
-
-<li><p>12.0.24之后，公匙不再存储在<strong>Navicat Premium.app/Contents/Resources/rpk</strong>中，而是放在了Navicat的二进制执行文件<strong>Navicat Premium.app/Contents/MacOS/Navicat Premium</strong>中，通过搜索<code>-----BEGIN PUBLIC KEY-----</code>找到它</p>
-
-<h1 id="算出有效的mac版序列号密匙">算出有效的Mac版序列号密匙</h1></li>
-
-<li><p>序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 <code>char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’</code> 80位长的二进制数据，可转换成为10个十六进制，如</p>
-
-<ul>
-<li>第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变；</li>
-<li>第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变；</li>
-<li>第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；</li>
-<li>第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；</li>
-<li>第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；</li>
-<li>第六个8位二进制数据：AA /第六个和第七个组合使用；</li>
-<li>第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português；</li>
-<li>第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本）</li>
-<li>第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本）</li>
-<li>第十个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可；</li>
-<li>如此，得到繁体中文版密匙的原始数据：<code>68 2A 00 00 00 AA 99 65 C0 FF</code></li>
-</ul></li>
-
-<li><p>对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为<code>00 00 00 AA 99 65 C0 FF</code>，DES加密密匙是<code>unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }</code>，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。</p>
-
-<h1 id="解密激活请求码-生成激活码">解密激活请求码，生成激活码</h1></li>
-
-<li><p>启动程序后，提示注册，<strong>断开网络，阻止程序联网</strong>，然后点击注册</p></li>
-
-<li><p>根据提示，点击手动激活，弹出离线激活请求，得到了程序给出的请求码（这是一个Base64编码的字符串，代表的是长度为256字节的数据，这是离线激活请求信息被激活公匙加密的密文</p></li>
-
-<li><p>经过RSA配对的私匙解密后，能得到激活请求信息（json风格） <code>{ “K“: “xxxxxxxxxxxxxxxx”， “P”: “Mac 10.13”， “DI”: “xxxxxxxxxxxxxxxxxxxx” }</code>这里包含了3个key：“K”、“DI”、“P”，分別代表序列号、设备识别号（与电脑硬件信息相关）和平台（操作系統类型）</p></li>
-
-<li><p>仍然通过RSA配对的私钥，使用上述的“K”和“DI”信息的json风格 <code>{ “DI” : “xxxxxxxxxxxxxxxxxxxx”, “T” : “1535808471.925012”, “K” : “xxxxxxxxxxxxxxxx”, “N” : “DoubleLabyrinth”, “O” : “Shadow” }</code>这里包含了5个key：“K”、“DI”、“N”、“T” 、“O”，分別代表序列号、设备识别号（与电脑硬件信息相关）、注册名、授权时间、组织。<strong>其中“T”是必须的，且代表的时间必须位于当前时间-1~+4天之內，采用的是unix时间戳</strong></p></li>
-
-<li><p>输入得到的离线激活回复信息，激活完毕。</p></li>
+<li>慢啓動階段：在建立新的TCP連接時，擁塞窗口（congestion window , 即cwnd）會初始化爲一個數據包大小，源斷按cwnd大小發送數據，每收到一個ACK確認，cwnd就增加一個數據包發送量，如此cwnd會隨着回路響應時間（RTT）的增加而增長。</li>
+<li>擁塞避免階段：若源斷發現超時或收到3個相同的ACK時，便認爲網絡發生了擁塞，進入擁塞避免階段。慢啓動閾值（ssthresh）被設置爲cwnd的一半；如果超時，擁塞窗口被置1。當cwnd&gt;ssthresh，TCP就會執行擁塞避免算法。</li>
+<li>快速重傳階段：在這個階段中，接受方在收到失序的報文段後會馬上發出重複確認，而不要等到自己發送數據時捎帶確認。</li>
+<li>快速恢復階段：</li>
 </ul>
 
-<p>參考鏈接： <a href="https://github.com/DoubleLabyrinth/navicat-keygen.git" rel="nofollow noreferrer" target="_blank">Double Sine</a></p>
+<h2 id="bbr-v2更新啦-2018">BBR v2更新啦（2018）</h2>
+
+<h2 id="centos7下開啓bbr擁塞控制算法">CentOS7下開啓BBR擁塞控制算法</h2>
+
+<ul>
+<li>查看Linux內核版本<code>unmae -a</code>
+開啓BBR的要求之一是內核版本必須在4.9以上</li>
+<li>升級內核版本
+
+<ul>
+<li>添加ELRepo GPG key<code>rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</code></li>
+<li>添加源<code>rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</code></li>
+<li>安裝fastestmirror<code>yum install yum-plugin-fastestmirror</code></li>
+<li>安裝最新Kernel<code>yum --enablerepo=elrepo-kernel install kernel-ml</code></li>
+<li>切換到新內核並重啓<code>grub2-set-default 0</code></li>
+</ul></li>
+<li>開啓BBR
+
+<ul>
+<li>在終端中輸入
+<code>vi /etc/sysctl.conf</code>，並加入
+<code>
+net.core.default_qdisc=tcp_bbr
+net.ipv4.tcp_congestion_control=bbr
+</code></li>
+<li>檢查是否設置成功
+<code>
+sysctl net.ipv4.tcp_available_congestion_control
+sysctl net.ipv4.tcp_congestion_control
+</code></li>
+</ul></li>
+<li>檢查BBR是否正常運行<code>lsmod | grep tcp_bbr</code></li>
+</ul>
 
     </div>
 
@@ -237,14 +225,11 @@
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://kvylin.github.io/tags/navicat/">
-                    #Navicat</a></span>
+            <span class="tag"><a href="https://kvylin.github.io/tags/bbr/">
+                    #BBR</a></span>
             
-            <span class="tag"><a href="https://kvylin.github.io/tags/mac/">
-                    #Mac</a></span>
-            
-            <span class="tag"><a href="https://kvylin.github.io/tags/rsa%E5%85%AC%E5%8C%99/">
-                    #RSA公匙</a></span>
+            <span class="tag"><a href="https://kvylin.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AB%96/">
+                    #控制論</a></span>
             
             </section>
         
@@ -256,10 +241,8 @@
 
     <div class="post-nav">
         
-        <a href="https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/" class="prev" rel="prev" title="Navicat Premium for Mac 破解教程"><i class="iconfont icon-left"></i>&nbsp;Navicat Premium for Mac 破解教程</a>
+        <a href="https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/" class="prev" rel="prev" title="大道至簡Hexo"><i class="iconfont icon-left"></i>&nbsp;大道至簡Hexo</a>
          
-        
-        <a href="https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/" class="next" rel="next" title="大道至簡Hexo">大道至簡Hexo&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -301,9 +284,8 @@
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
-      
-     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
     
   
 
