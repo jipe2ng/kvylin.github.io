@@ -17,8 +17,6 @@
       <guid>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/</guid>
       <description>
 
-&lt;h1 id=&#34;tcp-bbr擁塞控制算法&#34;&gt;TCP BBR擁塞控制算法&lt;/h1&gt;
-
 &lt;p&gt;BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。&lt;a href=&#34;https://github.com/google/bbr&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;項目更新在這裏&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
@@ -208,6 +206,54 @@ npm install
 &lt;/ul&gt;
 
 &lt;p&gt;立個flag：&lt;strong&gt;9月底完成對hexo的詳細剖析&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Navicat Premium for Mac 破解教程</title>
+      <link>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</guid>
+      <description>
+
+&lt;p&gt;本文仅以探讨破解思路，请支持正版&lt;/p&gt;
+
+&lt;h1 id=&#34;破解思路&#34;&gt;破解思路&lt;/h1&gt;
+
+&lt;p&gt;替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）&lt;/p&gt;
+
+&lt;h1 id=&#34;生成自己的rsa公匙私匙对&#34;&gt;生成自己的RSA公匙私匙对&lt;/h1&gt;
+
+&lt;p&gt;使用open ssl工具生成，当然也可以使用其它工具&lt;a href=&#34;http://web.chacuo.net/netrsakeypair&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;在线生成工具&lt;/a&gt;生成，這里需要注意的是&lt;code&gt;密匙是2048位，PKCS#8格式&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;替换rsa公匙&#34;&gt;替换RSA公匙&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;版本12.0.24之前，公匙存储在&lt;strong&gt;Navicat Premium.app/Contents/Resources/rpk&lt;/strong&gt;，用文本编辑器打开它，替换上述生成的公匙&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;12.0.24之后，公匙不再存储在&lt;strong&gt;Navicat Premium.app/Contents/Resources/rpk&lt;/strong&gt;中，而是放在了Navicat的二进制执行文件&lt;strong&gt;Navicat Premium.app/Contents/MacOS/Navicat Premium&lt;/strong&gt;中，通过搜索&lt;code&gt;-----BEGIN PUBLIC KEY-----&lt;/code&gt;找到它&lt;/p&gt;
+
+&lt;h1 id=&#34;算出有效的mac版序列号密匙&#34;&gt;算出有效的Mac版序列号密匙&lt;/h1&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 &lt;code&gt;char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’&lt;/code&gt; 80位长的二进制数据，可转换成为10个十六进制，如 第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变； 第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变； 第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第六个8位二进制数据：AA /第六个和第七个组合使用； 第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本） 第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本） 第是个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可； 如此，得到繁体中文版密匙的原始数据：&lt;code&gt;68 2A 00 00 00 AA 99 65 C0 FF&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为&lt;code&gt;00 00 00 AA 99 65 C0 FF&lt;/code&gt;，DES加密密匙是&lt;code&gt;unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }&lt;/code&gt;，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。&lt;/p&gt;
+
+&lt;h1 id=&#34;解密激活请求码-生成激活码&#34;&gt;解密激活请求码，生成激活码&lt;/h1&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;启动程序后，提示注册，&lt;strong&gt;断开网络，阻止程序联网&lt;/strong&gt;，然后点击注册&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;根据提示，点击手动激活，弹出离线激活请求，得到了程序给出的请求码（这是一个Base64编码的字符串，代表的是长度为256字节的数据，这是离线激活请求信息被激活公匙加密的密文&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;经过RSA配对的私匙解密后，能得到激活请求信息（json风格） &lt;code&gt;{ “K“: “xxxxxxxxxxxxxxxx”， “P”: “Mac 10.13”， “DI”: “xxxxxxxxxxxxxxxxxxxx” }&lt;/code&gt;这里包含了3个key：“K”、“DI”、“P”，分別代表序列号、设备识别号（与电脑硬件信息相关）和平台（操作系統类型）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;仍然通过RSA配对的私钥，使用上述的“K”和“DI”信息的json风格 &lt;code&gt;{ “DI” : “xxxxxxxxxxxxxxxxxxxx”, “T” : “1535808471.925012”, “K” : “xxxxxxxxxxxxxxxx”, “N” : “DoubleLabyrinth”, “O” : “Shadow” }&lt;/code&gt;这里包含了5个key：“K”、“DI”、“N”、“T” 、“O”，分別代表序列号、设备识别号（与电脑硬件信息相关）、注册名、授权时间、组织。&lt;strong&gt;其中“T”是必须的，且代表的时间必须位于当前时间-1~+4天之內，采用的是unix时间戳&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;输入得到的离线激活回复信息，激活完毕。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;參考鏈接： &lt;a href=&#34;https://github.com/DoubleLabyrinth/navicat-keygen.git&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Double Sine&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
