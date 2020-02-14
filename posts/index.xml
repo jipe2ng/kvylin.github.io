@@ -40,17 +40,39 @@ hexo init &amp;lt;folder&amp;gt; cd &amp;lt;folder&amp;gt; npm install  如此�
     </item>
     
     <item>
+      <title>2038年问题</title>
+      <link>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</guid>
+      <description> 什么是“2038年问题”?  2038年问题可能会导致某些软件在2038年1月19日3时14分07秒之后无法正常工作。所有使用POSIX时间表示时间的程序都将受其影响，因为它们以自1970年1月1日经过的秒数（忽略闰秒）来表示时间。 在大部分的32位操作系统上，此“time” 数据模式使用一个有正负号的32位整数（signed int32）存储计算的秒数。依照此“time_t”标准，在此格式能被表示的最后时间是2038年1月19日03:14:07 。
+有什么影响？ 超过此一瞬间，时间将会“绕回”溢出”)”（wrap around）且在内部被表示为一个负数，并造成程序无法工作，因为它们无法将此时间识别为2038年，而可能会依个别实现而跳回1970年或1901年。因此可能产生错误的计算及动作。
+ 有少数的情况下，在制定规格时，特别规定以无正负号的32位整数（unsigned int32）存储 POSIX 时间，因此错误会被延后到 2106 年。例如比特币区块链中的区块时间戳记，就是以这种方法存储。
+嵌入式系统 有数以亿计的32位系统在运行中，特别是许多嵌入式系统。相对于一般计算机科技18至24个月的革命性更新，嵌入式系统可能直至使用寿命终结都不会改变。32位time_t的使用亦被编码于文件格式，例如众所周知的ZIP压缩格式。其能存在的时间远比受影响的机器长。 新的64位运算器可以记录至约2900亿年后的292,277,026,596年12月4日15:30:08，星期日（UTC）
+网络时间协议（Network Time Protocol，简称NTP）  </description>
+    </item>
+    
+    <item>
+      <title>Surge 2.5.3无限期试用教程</title>
+      <link>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+      <description>本文仅以探讨 libfaketime的功能，请在surge试用期到期后，购买正版或卸載。 介紹 根据README文档的描述，libfaketime拦截程序用于检索系統当前日期和时间的各类系統调用，然后将修改（或是伪造）的日期和时间（由用户自身指定）报告给这些程序，它允许修改程序看到的系统时间，而不需要在系统时间处更改时间，从而不影响其它应用对本地时间的调用。 以下內容來自直接拷贝于 libfaketime，详细了解，请点击联接。
+2、 Compatibility issues ----------------------- - libfaketime is supposed to work on Linux and macOS. Your mileage may vary; some other *NIXes have been reported to work as well. - libfaketime uses the library preload mechanism of your operating system&#39;s linker (which is involved in starting programs) and thus cannot work with statically linked binaries or binaries that have the setuid-flag set (e.g., suidroot programs like &amp;quot;ping&amp;quot; or &amp;quot;passwd&amp;quot;).</description>
+    </item>
+    
+    <item>
       <title>Navicat Premium for Mac 破解教程</title>
       <link>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</guid>
-      <description>本文仅以探讨破解思路，请支持正版
-破解思路 替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）
+      <description>本文仅以探讨破解思路，请支持正版 破解思路 替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）
 生成自己的RSA公匙私匙对 使用open ssl工具生成，当然也可以使用其它工具在线生成工具生成，這里需要注意的是密匙是2048位，PKCS#8格式
 替换RSA公匙  版本12.0.24之前，公匙存储在Navicat Premium.app/Contents/Resources/rpk，用文本编辑器打开它，替换上述生成的公匙 12.0.24之后，公匙不再存储在Navicat Premium.app/Contents/Resources/rpk中，而是放在了Navicat的二进制执行文件Navicat Premium.app/Contents/MacOS/Navicat Premium中，通过搜索-----BEGIN PUBLIC KEY-----找到它
-算出有效的Mac版序列号密匙 序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’ 80位长的二进制数据，可转换成为10个十六进制，如 第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变； 第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变； 第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第六个8位二进制数据：AA /第六个和第七个组合使用； 第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本） 第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本） 第是个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可； 如此，得到繁体中文版密匙的原始数据：68 2A 00 00 00 AA 99 65 C0 FF
- 对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为00 00 00 AA 99 65 C0 FF，DES加密密匙是unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。</description>
+算出有效的Mac版序列号密匙 序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’ 80位长的二进制数据，可转换成为10个十六进制，如
+ 第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变； 第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变； 第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第六个8位二进制数据：AA /第六个和第七个组合使用； 第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本） 第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本） 第十个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可； 如此，得到繁体中文版密匙的原始数据：68 2A 00 00 00 AA 99 65 C0 FF  对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为00 00 00 AA 99 65 C0 FF，DES加密密匙是unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。</description>
     </item>
     
     <item>

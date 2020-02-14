@@ -208,6 +208,129 @@ npm install
     </item>
     
     <item>
+      <title>2038年问题</title>
+      <link>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;什么是-2038年问题&#34;&gt;什么是“2038年问题”?&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2038年问题&lt;/strong&gt;可能会导致某些软件在2038年1月19日3时14分07秒之后无法正常工作。所有使用POSIX时间表示时间的程序都将受其影响，因为它们以自1970年1月1日经过的秒数（忽略闰秒）来表示时间。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在大部分的32位操作系统上，此“time” 数据模式使用一个有正负号的32位整数（signed int32）存储计算的秒数。依照此“time_t”标准，在此格式能被表示的最后时间是&lt;strong&gt;2038年1月19日03:14:07&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&#34;有什么影响&#34;&gt;有什么影响？&lt;/h2&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;超过此一瞬间，时间将会“绕回”溢出”)”（wrap around）且在内部被表示为一个负数，并造成程序无法工作，因为它们无法将此时间识别为2038年，而可能会依个别实现而跳回1970年或1901年。因此可能产生错误的计算及动作。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;有少数的情况下，在制定规格时，特别规定以无正负号的32位整数（unsigned int32）存储 POSIX 时间，因此错误会被延后到 2106 年。例如比特币区块链中的区块时间戳记，就是以这种方法存储。&lt;/p&gt;
+
+&lt;h2 id=&#34;嵌入式系统&#34;&gt;嵌入式系统&lt;/h2&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;有数以亿计的32位系统在运行中，特别是许多嵌入式系统。相对于一般计算机科技18至24个月的革命性更新，嵌入式系统可能直至使用寿命终结都不会改变。32位time_t的使用亦被编码于文件格式，例如众所周知的ZIP压缩格式。其能存在的时间远比受影响的机器长。 &lt;strong&gt;新的64位运算器可以记录至约2900亿年后的292,277,026,596年12月4日15:30:08，星期日（UTC）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;网络时间协议-network-time-protocol-简称-ntp&#34;&gt;网络时间协议（&lt;strong&gt;Network Time Protocol&lt;/strong&gt;，简称&lt;strong&gt;NTP&lt;/strong&gt;）&lt;/h2&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Surge 2.5.3无限期试用教程</title>
+      <link>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+      <description>
+
+&lt;p&gt;本文仅以探讨 &lt;strong&gt;&lt;a href=&#34;https://github.com/wolfcw/libfaketime&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;libfaketime&lt;/a&gt;&lt;/strong&gt;的功能，请在surge试用期到期后，购买正版或卸載。
+&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;介紹&#34;&gt;介紹&lt;/h1&gt;
+
+&lt;p&gt;根据README文档的描述，libfaketime拦截程序用于检索系統当前日期和时间的各类系統调用，然后将修改（或是伪造）的日期和时间（由用户自身指定）报告给这些程序，它允许修改程序看到的系统时间，而不需要在系统时间处更改时间，从而不影响其它应用对本地时间的调用。 以下內容來自直接拷贝于 &lt;strong&gt;&lt;a href=&#34;https://github.com/wolfcw/libfaketime&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;libfaketime&lt;/a&gt;&lt;/strong&gt;，详细了解，请点击联接。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-language&#34;&gt;2、 Compatibility issues
+-----------------------
+- libfaketime is supposed to work on Linux and macOS.
+  Your mileage may vary; some other *NIXes have been reported to work as well.
+- libfaketime uses the library preload mechanism of your operating system&#39;s
+  linker (which is involved in starting programs) and thus cannot work with
+  statically linked binaries or binaries that have the setuid-flag set (e.g.,
+  suidroot programs like &amp;quot;ping&amp;quot; or &amp;quot;passwd&amp;quot;). Please see you system linker&#39;s
+  manpage for further details.
+- libfaketime supports the pthreads environment. A separate library is built
+  (libfaketimeMT.so.1), which contains the pthread synchronization calls. This
+  library also single-threads calls through the time() intercept because
+  several variables are statically cached by the library and could cause issues
+  when accessed without synchronization.
+  However, the performance penalty for this might be an issue for some
+  applications. If this is the case, you can try using an unsynchronized time()
+  intercept by removing the -DPTHREAD_SINGLETHREADED_TIME from the Makefile and
+  rebuilding libfaketimeMT.so.1
+* Java-/JVM-based applications work but you need to pass in an extra argument
+  (DONT_FAKE_MONOTONIC).  See usage basics below for details.  Without this
+  argument the java command usually hangs.
+* libfaketime will eventually be bypassed by applications that dynamically load
+  system libraries, such as librt, explicitly themselves instead of relying on
+  the linker to do so at application start time. libfaketime will not work with
+  those applications unless you can modify them.
+* Applications can explicitly be designed to prevent libfaketime from working,
+  e.g., by checking whether certain environment variables are set or whether
+  libfaketime-specific files are present.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;对surge的应用&#34;&gt;对surge的应用&lt;/h1&gt;
+
+&lt;h2 id=&#34;安裝libfaketime&#34;&gt;安裝libfaketime&lt;/h2&gt;
+
+&lt;p&gt;1、安裝Homebrew Mac下直接在终端下輸入下述命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Homebrew安裝成功后，可通过&lt;strong&gt;brew -v&lt;/strong&gt;显示Homebrew的版本号 2、Homebrew的基本操作 - 安裝软件：brew install &amp;lt;软件&amp;gt; - 搜索软件：brew search &amp;lt;软件&amp;gt; - 卸载软件：brew uninstall &amp;lt;软件&amp;gt; 3 、安裝libfaketime 通过终端安裝libfaketime和coreutils（由于依赖GNU时间，需要安裝coreutils），輸入下述命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install libfaketime coreutils
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安裝成功后，可在终端輸入&lt;strong&gt;faketime&lt;/strong&gt;来查看libfaketime是否安裝成功。&lt;/p&gt;
+
+&lt;h2 id=&#34;修改surge调用的系统时间&#34;&gt;修改Surge调用的系统时间&lt;/h2&gt;
+
+&lt;p&gt;直接通过faketime来运行Surge，并且为程序单独伪造系统时间2018年9月1日。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;faketime -f &#39;@2018-09-01 00:00:00&#39; /Applications/Surge.app/Contents/MacOS/Surge &amp;amp;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如此，便能看到Surge成功以2018年9月1日的时间运行。&lt;/p&gt;
+
+&lt;h2 id=&#34;其它说明的问题&#34;&gt;其它说明的问题&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;此方法仅用于Surge2.5.3之前的各个版本的试用测试&lt;/li&gt;
+&lt;li&gt;若系统上已安裝过新版本或提示“试用期已过，请重新授权”之类的话，此方法无效&lt;/li&gt;
+&lt;li&gt;libfaketime可能会占用大量CPU资源，可尝试添加&lt;strong&gt;FAKETIME_STOP_AFTER_SECONDS=10&lt;/strong&gt;(在程序启动后10秒，自动关闭libfaketime进程）&lt;/li&gt;
+&lt;li&gt;关闭libfaketime进程后，Surge的配置选项中，会显示剩余负数天数&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;参考链接中，更是给出了通过配合Alfred的Workflow的效果，本文不作讨论&lt;/p&gt;
+
+&lt;h1 id=&#34;libfaketime亦可对docker的具体应用做伪造系统时间&#34;&gt;libfaketime亦可对Docker的具体应用做伪造系统时间&lt;/h1&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考链接：&lt;a href=&#34;https://www.daletan.win/2017/10/27/surge-for-mac-trial-crack/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;子與孟子曰&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Navicat Premium for Mac 破解教程</title>
       <link>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
@@ -216,7 +339,8 @@ npm install
       <description>
 
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2020/02/14/jEBbMIF463PGfu8.jpg&#34; alt=&#34;藏宝图&#34; /&gt;
-本文仅以探讨破解思路，请支持正版&lt;/p&gt;
+本文仅以探讨破解思路，请支持正版
+&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;破解思路&#34;&gt;破解思路&lt;/h1&gt;
 
@@ -235,7 +359,21 @@ npm install
 
 &lt;h1 id=&#34;算出有效的mac版序列号密匙&#34;&gt;算出有效的Mac版序列号密匙&lt;/h1&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 &lt;code&gt;char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’&lt;/code&gt; 80位长的二进制数据，可转换成为10个十六进制，如 第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变； 第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变； 第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变； 第六个8位二进制数据：AA /第六个和第七个组合使用； 第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português； 第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本） 第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本） 第是个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可； 如此，得到繁体中文版密匙的原始数据：&lt;code&gt;68 2A 00 00 00 AA 99 65 C0 FF&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 &lt;code&gt;char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’&lt;/code&gt; 80位长的二进制数据，可转换成为10个十六进制，如&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变；&lt;/li&gt;
+&lt;li&gt;第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变；&lt;/li&gt;
+&lt;li&gt;第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
+&lt;li&gt;第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
+&lt;li&gt;第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
+&lt;li&gt;第六个8位二进制数据：AA /第六个和第七个组合使用；&lt;/li&gt;
+&lt;li&gt;第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português；&lt;/li&gt;
+&lt;li&gt;第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本）&lt;/li&gt;
+&lt;li&gt;第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本）&lt;/li&gt;
+&lt;li&gt;第十个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可；&lt;/li&gt;
+&lt;li&gt;如此，得到繁体中文版密匙的原始数据：&lt;code&gt;68 2A 00 00 00 AA 99 65 C0 FF&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为&lt;code&gt;00 00 00 AA 99 65 C0 FF&lt;/code&gt;，DES加密密匙是&lt;code&gt;unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }&lt;/code&gt;，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。&lt;/p&gt;
 
