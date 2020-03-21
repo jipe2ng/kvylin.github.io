@@ -17,6 +17,67 @@
       <guid>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD/</guid>
       <description>
 
+&lt;h1 id=&#34;tcp-bbr擁塞控制算法&#34;&gt;TCP BBR擁塞控制算法&lt;/h1&gt;
+
+&lt;p&gt;BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。&lt;a href=&#34;https://github.com/google/bbr&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;項目更新在這裏&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+
+&lt;h3 id=&#34;tcp基於丟包的擁塞控制&#34;&gt;TCP基於丟包的擁塞控制&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;慢啓動階段：在建立新的TCP連接時，擁塞窗口（congestion window , 即cwnd）會初始化爲一個數據包大小，源斷按cwnd大小發送數據，每收到一個ACK確認，cwnd就增加一個數據包發送量，如此cwnd會隨着回路響應時間（RTT）的增加而增長。&lt;/li&gt;
+&lt;li&gt;擁塞避免階段：若源斷發現超時或收到3個相同的ACK時，便認爲網絡發生了擁塞，進入擁塞避免階段。慢啓動閾值（ssthresh）被設置爲cwnd的一半；如果超時，擁塞窗口被置1。當cwnd&amp;gt;ssthresh，TCP就會執行擁塞避免算法。&lt;/li&gt;
+&lt;li&gt;快速重傳階段：在這個階段中，接受方在收到失序的報文段後會馬上發出重複確認，而不要等到自己發送數據時捎帶確認。&lt;/li&gt;
+&lt;li&gt;快速恢復階段：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;bbr-v2更新啦-2018&#34;&gt;BBR v2更新啦（2018）&lt;/h2&gt;
+
+&lt;h2 id=&#34;centos7下開啓bbr擁塞控制算法&#34;&gt;CentOS7下開啓BBR擁塞控制算法&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;查看Linux內核版本&lt;code&gt;unmae -a&lt;/code&gt;
+開啓BBR的要求之一是內核版本必須在4.9以上&lt;/li&gt;
+&lt;li&gt;升級內核版本
+
+&lt;ul&gt;
+&lt;li&gt;添加ELRepo GPG key&lt;code&gt;rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;添加源&lt;code&gt;rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安裝fastestmirror&lt;code&gt;yum install yum-plugin-fastestmirror&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安裝最新Kernel&lt;code&gt;yum --enablerepo=elrepo-kernel install kernel-ml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切換到新內核並重啓&lt;code&gt;grub2-set-default 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;開啓BBR
+
+&lt;ul&gt;
+&lt;li&gt;在終端中輸入
+&lt;code&gt;vi /etc/sysctl.conf&lt;/code&gt;，並加入
+&lt;code&gt;
+net.core.default_qdisc=tcp_bbr
+net.ipv4.tcp_congestion_control=bbr
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;檢查是否設置成功
+&lt;code&gt;
+sysctl net.ipv4.tcp_available_congestion_control
+sysctl net.ipv4.tcp_congestion_control
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;檢查BBR是否正常運行&lt;code&gt;lsmod | grep tcp_bbr&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TCP BBR擁塞控制算法</title>
+      <link>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD%E7%9A%84%E5%89%AF%E6%9C%AC/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://kvylin.github.io/2018/centos%E9%96%8B%E5%95%93bbr%E5%8A%9F%E8%83%BD%E7%9A%84%E5%89%AF%E6%9C%AC/</guid>
+      <description>
+
+&lt;h1 id=&#34;tcp-bbr擁塞控制算法&#34;&gt;TCP BBR擁塞控制算法&lt;/h1&gt;
+
 &lt;p&gt;BBR是谷歌在2016年提出的TCP擁塞控制算法，極大地提高了TCP的吞吐量，在Linux4.9的patch中正式加入。&lt;a href=&#34;https://github.com/google/bbr&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;項目更新在這裏&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
@@ -73,6 +134,8 @@ sysctl net.ipv4.tcp_congestion_control
       
       <guid>https://kvylin.github.io/2018/%E5%A4%A7%E9%81%93%E8%87%B3%E7%B0%A1hexo/</guid>
       <description>
+
+&lt;h1 id=&#34;大道至簡hexo&#34;&gt;大道至簡Hexo&lt;/h1&gt;
 
 &lt;p&gt;Hexo 是一個由&lt;a href=&#34;http://nodejs.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Node.js&lt;/a&gt;構建的快速、簡單且強大的網誌框架。&lt;/p&gt;
 
@@ -208,193 +271,6 @@ npm install
     </item>
     
     <item>
-      <title>2038年问题</title>
-      <link>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/2038%E5%B9%B4%E9%97%AE%E9%A2%98/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;什么是-2038年问题&#34;&gt;什么是“2038年问题”?&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;2038年问题&lt;/strong&gt;可能会导致某些软件在2038年1月19日3时14分07秒之后无法正常工作。所有使用POSIX时间表示时间的程序都将受其影响，因为它们以自1970年1月1日经过的秒数（忽略闰秒）来表示时间。&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;在大部分的32位操作系统上，此“time” 数据模式使用一个有正负号的32位整数（signed int32）存储计算的秒数。依照此“time_t”标准，在此格式能被表示的最后时间是&lt;strong&gt;2038年1月19日03:14:07&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;h2 id=&#34;有什么影响&#34;&gt;有什么影响？&lt;/h2&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;超过此一瞬间，时间将会“绕回”溢出”)”（wrap around）且在内部被表示为一个负数，并造成程序无法工作，因为它们无法将此时间识别为2038年，而可能会依个别实现而跳回1970年或1901年。因此可能产生错误的计算及动作。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;有少数的情况下，在制定规格时，特别规定以无正负号的32位整数（unsigned int32）存储 POSIX 时间，因此错误会被延后到 2106 年。例如比特币区块链中的区块时间戳记，就是以这种方法存储。&lt;/p&gt;
-
-&lt;h2 id=&#34;嵌入式系统&#34;&gt;嵌入式系统&lt;/h2&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;有数以亿计的32位系统在运行中，特别是许多嵌入式系统。相对于一般计算机科技18至24个月的革命性更新，嵌入式系统可能直至使用寿命终结都不会改变。32位time_t的使用亦被编码于文件格式，例如众所周知的ZIP压缩格式。其能存在的时间远比受影响的机器长。 &lt;strong&gt;新的64位运算器可以记录至约2900亿年后的292,277,026,596年12月4日15:30:08，星期日（UTC）&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;网络时间协议-network-time-protocol-简称-ntp&#34;&gt;网络时间协议（&lt;strong&gt;Network Time Protocol&lt;/strong&gt;，简称&lt;strong&gt;NTP&lt;/strong&gt;）&lt;/h2&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Surge 2.5.3无限期试用教程</title>
-      <link>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/surge-2.5.3%E6%97%A0%E9%99%90%E6%9C%9F%E8%AF%95%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
-      <description>
-
-&lt;p&gt;本文仅以探讨 &lt;strong&gt;&lt;a href=&#34;https://github.com/wolfcw/libfaketime&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;libfaketime&lt;/a&gt;&lt;/strong&gt;的功能，请在surge试用期到期后，购买正版或卸載。
-&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;介紹&#34;&gt;介紹&lt;/h1&gt;
-
-&lt;p&gt;根据README文档的描述，libfaketime拦截程序用于检索系統当前日期和时间的各类系統调用，然后将修改（或是伪造）的日期和时间（由用户自身指定）报告给这些程序，它允许修改程序看到的系统时间，而不需要在系统时间处更改时间，从而不影响其它应用对本地时间的调用。 以下內容來自直接拷贝于 &lt;strong&gt;&lt;a href=&#34;https://github.com/wolfcw/libfaketime&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;libfaketime&lt;/a&gt;&lt;/strong&gt;，详细了解，请点击联接。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-language&#34;&gt;2、 Compatibility issues
------------------------
-- libfaketime is supposed to work on Linux and macOS.
-  Your mileage may vary; some other *NIXes have been reported to work as well.
-- libfaketime uses the library preload mechanism of your operating system&#39;s
-  linker (which is involved in starting programs) and thus cannot work with
-  statically linked binaries or binaries that have the setuid-flag set (e.g.,
-  suidroot programs like &amp;quot;ping&amp;quot; or &amp;quot;passwd&amp;quot;). Please see you system linker&#39;s
-  manpage for further details.
-- libfaketime supports the pthreads environment. A separate library is built
-  (libfaketimeMT.so.1), which contains the pthread synchronization calls. This
-  library also single-threads calls through the time() intercept because
-  several variables are statically cached by the library and could cause issues
-  when accessed without synchronization.
-  However, the performance penalty for this might be an issue for some
-  applications. If this is the case, you can try using an unsynchronized time()
-  intercept by removing the -DPTHREAD_SINGLETHREADED_TIME from the Makefile and
-  rebuilding libfaketimeMT.so.1
-* Java-/JVM-based applications work but you need to pass in an extra argument
-  (DONT_FAKE_MONOTONIC).  See usage basics below for details.  Without this
-  argument the java command usually hangs.
-* libfaketime will eventually be bypassed by applications that dynamically load
-  system libraries, such as librt, explicitly themselves instead of relying on
-  the linker to do so at application start time. libfaketime will not work with
-  those applications unless you can modify them.
-* Applications can explicitly be designed to prevent libfaketime from working,
-  e.g., by checking whether certain environment variables are set or whether
-  libfaketime-specific files are present.
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;对surge的应用&#34;&gt;对surge的应用&lt;/h1&gt;
-
-&lt;h2 id=&#34;安裝libfaketime&#34;&gt;安裝libfaketime&lt;/h2&gt;
-
-&lt;p&gt;1、安裝Homebrew Mac下直接在终端下輸入下述命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Homebrew安裝成功后，可通过&lt;strong&gt;brew -v&lt;/strong&gt;显示Homebrew的版本号 2、Homebrew的基本操作 - 安裝软件：brew install &amp;lt;软件&amp;gt; - 搜索软件：brew search &amp;lt;软件&amp;gt; - 卸载软件：brew uninstall &amp;lt;软件&amp;gt; 3 、安裝libfaketime 通过终端安裝libfaketime和coreutils（由于依赖GNU时间，需要安裝coreutils），輸入下述命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;brew install libfaketime coreutils
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;安裝成功后，可在终端輸入&lt;strong&gt;faketime&lt;/strong&gt;来查看libfaketime是否安裝成功。&lt;/p&gt;
-
-&lt;h2 id=&#34;修改surge调用的系统时间&#34;&gt;修改Surge调用的系统时间&lt;/h2&gt;
-
-&lt;p&gt;直接通过faketime来运行Surge，并且为程序单独伪造系统时间2018年9月1日。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;faketime -f &#39;@2018-09-01 00:00:00&#39; /Applications/Surge.app/Contents/MacOS/Surge &amp;amp;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如此，便能看到Surge成功以2018年9月1日的时间运行。&lt;/p&gt;
-
-&lt;h2 id=&#34;其它说明的问题&#34;&gt;其它说明的问题&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;此方法仅用于Surge2.5.3之前的各个版本的试用测试&lt;/li&gt;
-&lt;li&gt;若系统上已安裝过新版本或提示“试用期已过，请重新授权”之类的话，此方法无效&lt;/li&gt;
-&lt;li&gt;libfaketime可能会占用大量CPU资源，可尝试添加&lt;strong&gt;FAKETIME_STOP_AFTER_SECONDS=10&lt;/strong&gt;(在程序启动后10秒，自动关闭libfaketime进程）&lt;/li&gt;
-&lt;li&gt;关闭libfaketime进程后，Surge的配置选项中，会显示剩余负数天数&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;参考链接中，更是给出了通过配合Alfred的Workflow的效果，本文不作讨论&lt;/p&gt;
-
-&lt;h1 id=&#34;libfaketime亦可对docker的具体应用做伪造系统时间&#34;&gt;libfaketime亦可对Docker的具体应用做伪造系统时间&lt;/h1&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;参考链接：&lt;a href=&#34;https://www.daletan.win/2017/10/27/surge-for-mac-trial-crack/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;子與孟子曰&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Navicat Premium for Mac 破解教程</title>
-      <link>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2018/navicat-premium-for-mac-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2020/02/14/jEBbMIF463PGfu8.jpg&#34; alt=&#34;藏宝图&#34; /&gt;
-本文仅以探讨破解思路，请支持正版
-&lt;img src=&#34;https://img02.unless.online/file/unless/andrew-neel-1332001.jpg&#34; alt=&#34;b2&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;破解思路&#34;&gt;破解思路&lt;/h1&gt;
-
-&lt;p&gt;替换RSA加密算法公匙（Navicat Premium for Mac中的公匙位于程序包目录的rpk文件中）&lt;/p&gt;
-
-&lt;h1 id=&#34;生成自己的rsa公匙私匙对&#34;&gt;生成自己的RSA公匙私匙对&lt;/h1&gt;
-
-&lt;p&gt;使用open ssl工具生成，当然也可以使用其它工具&lt;a href=&#34;http://web.chacuo.net/netrsakeypair&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;在线生成工具&lt;/a&gt;生成，這里需要注意的是&lt;code&gt;密匙是2048位，PKCS#8格式&lt;/code&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;替换rsa公匙&#34;&gt;替换RSA公匙&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;版本12.0.24之前，公匙存储在&lt;strong&gt;Navicat Premium.app/Contents/Resources/rpk&lt;/strong&gt;，用文本编辑器打开它，替换上述生成的公匙&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;12.0.24之后，公匙不再存储在&lt;strong&gt;Navicat Premium.app/Contents/Resources/rpk&lt;/strong&gt;中，而是放在了Navicat的二进制执行文件&lt;strong&gt;Navicat Premium.app/Contents/MacOS/Navicat Premium&lt;/strong&gt;中，通过搜索&lt;code&gt;-----BEGIN PUBLIC KEY-----&lt;/code&gt;找到它&lt;/p&gt;
-
-&lt;h1 id=&#34;算出有效的mac版序列号密匙&#34;&gt;算出有效的Mac版序列号密匙&lt;/h1&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;序列号是一个16字节长度的字符串，是经过Base32编码的，其实际存储长度为80位（8字节），输入密匙后程序仍然会用Base33编码，以二进制形式存储比对。 正常的Base32编码表顺序是 &lt;code&gt;char EncodeTable[]=‘ABCDEFGHIJKLMNOPQRSTUVWXYZ234567’&lt;/code&gt; 80位长的二进制数据，可转换成为10个十六进制，如&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;第一个8位二进制数据：68 /原作者表示不知是什么，但不能改变；&lt;/li&gt;
-&lt;li&gt;第二个8位二进制数据：2A /原作者表示不知是什么，但不能改变；&lt;/li&gt;
-&lt;li&gt;第三个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
-&lt;li&gt;第四个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
-&lt;li&gt;第五个8位二进制数据：00 /原作者表示不知是什么，但可任意改变；&lt;/li&gt;
-&lt;li&gt;第六个8位二进制数据：AA /第六个和第七个组合使用；&lt;/li&gt;
-&lt;li&gt;第七个8位二进制数据：99 /第六个和第七个组合使用，目前已知0xAC 0x88代表英文版，0xCE 0x32代表简体中文版，0xAA 0x99代表繁体中文版，0xAD 0x82代表日本语，0xBB 0x55代表Polski，0xAE 0x10代表Español，0xFA 0x20代表Français，0xB1 0x60代表Deutsch，0xB5 0x60代表한국어，0xEE 0x16代表Русский，0xCD 0x49代表Português；&lt;/li&gt;
-&lt;li&gt;第八个8位二进制数据：65 /代表商业许可类型，0x65代表企业版，0x66代表教育版，0x67代表精简版；（以上数据为Navicat12版本）&lt;/li&gt;
-&lt;li&gt;第九个8位二进制数据：C0 /这个8位数据的前4位必须是1100，转换为十进制就是12，代表版本12，数据的后4位不知道代表什么，但是可以延迟激活使用时间，后4位可以是0000或0001；（以上数据为Navicat12版本）&lt;/li&gt;
-&lt;li&gt;第十个8位二进制数据：FF /代表許可的期限权利类型，0xFB代表30天不可转售许可，0xFC代表90天不可转售许可，0xFD代表365天不可转售许可，0xFE代表不可转售许可，0xFF代表站点许可；&lt;/li&gt;
-&lt;li&gt;如此，得到繁体中文版密匙的原始数据：&lt;code&gt;68 2A 00 00 00 AA 99 65 C0 FF&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;对密匙後8个8位数据進行DES对称加密，使用DES加密算法，并采用ECB模式。这里，需要加密的是为&lt;code&gt;00 00 00 AA 99 65 C0 FF&lt;/code&gt;，DES加密密匙是&lt;code&gt;unsigned char DESKey = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 }&lt;/code&gt;，计算得出加密后的序列号密匙数据，并将原始数据转换为二进制，按每5位一组，进行Base32编码，转为十进制，按找Base32编码表，便能得到了相应版本的密匙。&lt;/p&gt;
-
-&lt;h1 id=&#34;解密激活请求码-生成激活码&#34;&gt;解密激活请求码，生成激活码&lt;/h1&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;启动程序后，提示注册，&lt;strong&gt;断开网络，阻止程序联网&lt;/strong&gt;，然后点击注册&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;根据提示，点击手动激活，弹出离线激活请求，得到了程序给出的请求码（这是一个Base64编码的字符串，代表的是长度为256字节的数据，这是离线激活请求信息被激活公匙加密的密文&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;经过RSA配对的私匙解密后，能得到激活请求信息（json风格） &lt;code&gt;{ “K“: “xxxxxxxxxxxxxxxx”， “P”: “Mac 10.13”， “DI”: “xxxxxxxxxxxxxxxxxxxx” }&lt;/code&gt;这里包含了3个key：“K”、“DI”、“P”，分別代表序列号、设备识别号（与电脑硬件信息相关）和平台（操作系統类型）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;仍然通过RSA配对的私钥，使用上述的“K”和“DI”信息的json风格 &lt;code&gt;{ “DI” : “xxxxxxxxxxxxxxxxxxxx”, “T” : “1535808471.925012”, “K” : “xxxxxxxxxxxxxxxx”, “N” : “DoubleLabyrinth”, “O” : “Shadow” }&lt;/code&gt;这里包含了5个key：“K”、“DI”、“N”、“T” 、“O”，分別代表序列号、设备识别号（与电脑硬件信息相关）、注册名、授权时间、组织。&lt;strong&gt;其中“T”是必须的，且代表的时间必须位于当前时间-1~+4天之內，采用的是unix时间戳&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;输入得到的离线激活回复信息，激活完毕。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;參考鏈接： &lt;a href=&#34;https://github.com/DoubleLabyrinth/navicat-keygen.git&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Double Sine&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>关”余“</title>
       <link>https://kvylin.github.io/about/</link>
       <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
@@ -412,22 +288,6 @@ npm install
 - 测试
 - 2018.11
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>W计划</title>
-      <link>https://kvylin.github.io/2002/w%E8%AE%A1%E5%88%92/</link>
-      <pubDate>Sat, 07 Dec 2002 00:00:00 +0000</pubDate>
-      
-      <guid>https://kvylin.github.io/2002/w%E8%AE%A1%E5%88%92/</guid>
-      <description>&lt;p&gt;###  2141年6月7日，处在“M-SE”SC的星球信息接收站的情报员瓦它诺接到了地球的SOS。他立即向Dragon’s angel和Merry’s angel汇报。原来，地球遭到了外星人的破坏，他们洒下了大量的HJPH，使地球上的环境惨不忍睹。 因此，Dragon’s angel和Merry’s angel与地球上的“环境二兄弟”——Environment和Purify取得联，准备从外星人手中夺取HJPH的配制方案，以恢复地球原先的环境，使地球再次成为“环保天国”。&lt;/p&gt;
-
-&lt;p&gt;### 他们组成了“HB4”并将地球划分成三个区域——蓝天、陆地、海洋，同时实行“W”计划。Dragon’s angel负责全局，Merry’s angel负责蓝天区域（LT区），Environment负责陆地区域（LD区），Purify负责海洋区域（LY区）。 话说Dragon’s angel和Merry’s angel乘坐着微型超光速宇宙飞船MGC（因为2141年的地球已经成了各星球的殖民地了，所以地球的大气层外一千公里都有激光束探测器）。“在离地球三千光年处发现UFO。”激光束探测器发出了信号。正忙于把地球人做“实验品”的Degemerate Rate博士收到这个信号后，立即发出命令“出动两个智能机器人集团，全力阻击，将UFO消灭。”顿时，其他DSR的大门打开，五十万智能机器人从DSR向MGC飞去。
- ### 几秒钟后，在地球前方十光年处，由两个智能机器人组成的集团——“BWZ”出现。这时，Dragon’s angel驾驶的微型超光速宇宙飞船MGC发现“BWZ”。Dragon’s angel发出了超次声波的激光束。可是这对于“BWZ”来说根本没有什么作用，反而“BWZ”吸收了激光束，向MGC射击。Merry’s angel问道：“我们现在该怎么办，Dragon’s angel？”Dragon’s angel沉默了一秒钟，脸上露出了微笑，立即将MGC变形成一个微笑的机器人。这时，“BWZ”发出的激光束从这个机器人身边擦过，射向另一边的“BWZ”成员。就这样，五十万智能机器人只剩下十二万智能机器人。它们向基地DSR发出求救信息，Degemerate Rate博士十分恼火，就命令它们回到基地。 Dragon’s angel和Merry’s angel正在机器人内相互祝贺。就在这时，一个庞大的宇宙飞船EOU在离它们十二光年处出现。Dragon’s angel的第六感觉告诉他，它们的灾难马上就要来临了。当他觉醒过来时，已经有一束比激光束还厉害100倍的光束向它们的机器人飞来。“有不明光束向机器人飞来，十光年，八光年，五光年，二光年，一光年，……”正当Dragon’s angel做出最后决定：与EOU决一死战时，Environment和Purify驾驶着PTC宇宙飞船前来帮助MGC。他们用PTC的底部将光束弹回，并在EOU的头上投下一颗无污染的氢弹。顿时，浓烟包围了EOU，任凭它怎样挣扎，却逃不出浓烟的范围。就这样，MGC在PTC的引导下，穿过大气层，躲过了激光束探测器的扫描，胜利地来到了Environment和Purify的基地——HGC。 Environment知道属于他们的时间不多了，因为他们迟一秒钟完成“W”计划，就有十万地球人的生命面临危险。因此，他马上说：“Purify，你马上去准备一下，我们要立即与Dragon’s angel和Merry’s angel讨论，做出最后决定，如何将‘W’计划布署得天衣无缝。”过了三秒钟后，他们四人都已到场。Purify把他们带进了一个数字化的密室。过了三天三夜，他们已经将所有的问题和可能会遇到的困难都解决了，现在唯一的问题就是兵力不够。因为Environment的手中只有二百万个智能机器人集团，而要想打败Degemerate Rate博士的机器人是绝对不可能的。经Merry’s angel提醒，Dragon’s angel用意念命令瓦它诺从“M-SE”SC派出三百万个智能机器人集团师，瓦它诺向“M-SE”SC的机器人基地发出信号“1631922310171844182625D”。顿时，三百万个智能机器人集团师组成了ZJLZ，以每秒0.5光年的速度向地球进军。在离地球一千光年处，这三百万个智能机器人集团师根据Dragon’s angel发出的意念，成功地穿越了Degemerate Rate博士设置的“地球保护墙”。它们到地球后，全体变成生物形态，以防激光束探测器的扫描和跟踪。就这样，它们顺利地来到了Dragon’s angel的身边。 在2141年7月6日，Dragon’s angel、Merry’s angel、Environment和Purify正式实施“W”计划。 Dragon’s angel坐在一艘智能宇宙飞船上，为其他三位“HB4”成员提供敌方信息和资源，负责突破LT区。她派出一百万个智能机器人集团师，从正面向外星人发起挑战，再派出五十万个智能机器人集团精英，准备从外星人的后方突破防护线，再来个两面夹击。可她根本就没有想到Degemerate Rate博士竟然会用他的最新研究成果——KZJQR，使Merry’s angel的五十万个智能机器人集团精英全部叛变，而且Dragon’s angel的指挥系统没有异常反应。Merry’s angel用意念问Dragon’s angel：“怎么样，我的精英进展如何？”Dragon’s angel的第六感觉告诉他，那五十万集团精英已经叛变。Merry’s angel对此十分恼火，准备命令一百万智能机器人集团师冲进去跟Degemerate Rate博士的空中不对展开激烈地战斗。但Dragon’s angel说“Merry’s angel不要冲动，你先冷静下来，再与‘环保二兄弟’商量商量。不过我们先得看一下他们的进展如何，你先撤出来，回到基地。”Merry’s angel十分气愤“Dragon’s angel，你应该清除，损失五十万个智能机器人集团，对‘M-SE’SC来说是小事，但对地球目前的状况来说，就非常严重了。”Dragon’s angel兴奋地说：“Merry’s angel，环保二兄弟那儿也有消息了。” 原来，Environment采取“诱兵之计”。先集中一百二十五万个智能机器人集团师向LD区的后防线开火，直到LD区的后防线兵力不足，它们就会将所有能调动的集团师都调动过来。因此，它们的前线没有兵力了。Environment用超次声波向Dragon’s angel求救，要求再派出五万个智能机器人集团师攻占LD区的前线。就这样，后防线的战斗持续了三个小时，前线却早已倍Environment的部队占领。Environment采用两面夹击战术将LD区占领。 “Purify要想攻占LY区是比较困难的。因为在海洋钟中敌暗我明。”Dragon’s angel对已经在总部的Merry’s angel说。没有想到，Purify竟然只用了一个小时就将LY区的所有智能机器人全部变成无污染泡沫浮上了海面。原来，Purify命令所有装有PMF弹的智能机器人分布在各个海域上空一千米处，然后下令将PMF弹投入海洋，不到二十分钟，看不见海面了，只有各种颜色的泡沫浮上了海面。接着，他们又将泡沫收集起来，带回总部，被改造成四个“超人”。
- ### 这样一来，整个地球的三分之二地区就被Dragon’s angel的机器人占领了。只剩下LT区在Degemerate Rate博士的控制之下。“HB4”成员都回到总部了。这时，Dragon’s angel急促地说：“Merry’s angel、Environment和Purify准备实行‘W’计划的第二方案——TP。”接着，Purify说：“Dragon’s angel，我认为，我们应该先出动二百万个智能机器人集团师和三个‘超人’，以防Rate博士进行反攻。”Environment觉得这个十分好。Dragon’s angel仍然在总部进行指挥，其他三位各自进入超人的内部，带领着三百万个智能机器人集团师精英区进攻LT区。 Merry’s angel说：“我认为我们采取大规模进攻，与Degemerate Rate博士决一死战。”Dragon’s angel沉默了一下（因为在“M-SE”SC上都采用这种方式，不知地球人是怎样进攻的），便问：“Environment你认为这种大规模进攻怎么样？”于是，Environment与Purify商量了一下，说：“我认为这样对我们的兵力影响很大，我建议利用火力引起敌人的注意，过三四天后，再进行偷袭，进入Degemerate Rate博士的实验室，夺取HJPH的配置方案。这样成功的希望要大一些，怎么样？” Dragon’s angel听了微笑道：“就按你的意思去办吧。”就这样，三百万个智能机器人集团师向LT区发射了无数条激光束。Dragon’s angel得知已经突破防护线的消息后，就去支援其他三位“HB4”成员。这时，Degemerate Rate博士的灵感告诉他，“HB4”所有成员将要对LT区发起偷袭，但他也无能为力去阻止他们。因此，他们与Degemerate Rate博士在实验室展开了激战。Purify只要将一些被Degemerate Rate博士做事的地球人救回基地，Merry’s angel负责寻找HJPH的配制药房，其他两位成员要与Degemerate Rate博士展开一场殊死的战斗。
- ### 忽然，在这个密室里散发处一种“CH”的毒气，使得Environment和Dragon’s angel全身忽冷忽热，生不如死。但是他们还坚持了半个小时，使Merry’s angel有更多的时间去寻找HJPH的配制方案。可是，当她和Purify回基地准备配制药剂时，Degemerate Rate博士的实验室发出了一声足以使地球抖动的爆炸声。Environment、Dragon’s angel和Degemerate Rate博士同归于尽了。
- ### 就这样，地球又恢复了原先的环境，地球又重新站起来了，M和Purify告别后，带领所有部队回到了“M-SE”SC。M在MGC上看地球，“啊！地球太美了！”&lt;/p&gt;
 </description>
     </item>
     
